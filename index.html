@@ -1,111 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>BetPro Sportsbook</title>
+  <title>BetPro</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+    * { margin:0; padding:0; font-family:Arial; box-sizing:border-box; }
 
-    body {
-      background: #0b1220;
-      color: white;
-    }
+    body { background:#0b1220; color:white; }
 
-    /* HEADER */
     header {
-      background: #111a2e;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background:#111a2e;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
 
-    header nav a {
-      color: #cbd5e1;
-      margin: 0 10px;
-      text-decoration: none;
+    nav a {
+      color:#cbd5e1;
+      margin:0 10px;
+      text-decoration:none;
     }
 
-    header nav a:hover {
-      color: white;
-    }
+    nav a:hover { color:white; }
 
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-      color: #4ade80;
-    }
+    .logo { color:#4ade80; font-weight:bold; }
 
-    .btn {
-      background: #4ade80;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-      background: linear-gradient(135deg, #0f172a, #111a2e);
-    }
-
-    .hero h1 {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: #94a3b8;
-    }
-
-    /* MATCH GRID */
     .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      padding: 30px;
-      gap: 15px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      padding:20px;
+      gap:15px;
     }
 
     .card {
-      background: #111a2e;
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid #1f2a44;
+      background:#111a2e;
+      padding:15px;
+      border-radius:10px;
+      border:1px solid #1f2a44;
     }
 
-    .odds button {
-      background: #1f2a44;
-      border: none;
-      margin: 5px;
-      padding: 10px;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
+    .odd {
+      background:#1f2a44;
+      color:white;
+      border:none;
+      padding:8px;
+      margin:5px;
+      border-radius:6px;
+      cursor:pointer;
     }
 
-    .odds button:hover {
-      background: #2a3a5f;
+    .odd span {
+      color:#4ade80;
+      display:block;
+      font-size:12px;
     }
 
-    /* BET SLIP */
     .betslip {
-      position: fixed;
-      right: 20px;
-      top: 120px;
-      width: 240px;
-      background: #111a2e;
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid #1f2a44;
+      position:fixed;
+      right:20px;
+      top:100px;
+      width:240px;
+      background:#111a2e;
+      padding:15px;
+      border-radius:10px;
+      border:1px solid #1f2a44;
     }
   </style>
 </head>
@@ -114,48 +73,42 @@
 
 <header>
   <div class="logo">BetPro</div>
-
   <nav>
-    <a href="#">Home</a>
-    <a href="#">Live</a>
-    <a href="#">Bets</a>
-    <a href="#">Wallet</a>
+    <a href="index.html">Home</a>
+    <a href="bets.html">My Bets</a>
+    <a href="wallet.html">Wallet</a>
+    <a href="login.html">Login</a>
   </nav>
-
-  <button class="btn">Login</button>
 </header>
 
-<div class="hero">
-  <h1>Bet Smarter. Win Bigger.</h1>
-  <p>Live odds • Fast payouts • Secure betting</p>
-</div>
+<h2 style="padding:20px;">Live Matches</h2>
 
 <div class="grid">
 
   <div class="card">
     <h3>Arsenal vs Chelsea</h3>
-    <div class="odds">
-      <button>1 1.85</button>
-      <button>X 3.20</button>
-      <button>2 4.10</button>
-    </div>
+
+    <button class="odd" data-match="Arsenal vs Chelsea" data-pick="1" data-odds="1.85">1 <span>1.85</span></button>
+    <button class="odd" data-match="Arsenal vs Chelsea" data-pick="X" data-odds="3.20">X <span>3.20</span></button>
+    <button class="odd" data-match="Arsenal vs Chelsea" data-pick="2" data-odds="4.10">2 <span>4.10</span></button>
   </div>
 
   <div class="card">
     <h3>Real Madrid vs Barcelona</h3>
-    <div class="odds">
-      <button>1 2.10</button>
-      <button>X 3.40</button>
-      <button>2 3.00</button>
-    </div>
+
+    <button class="odd" data-match="Real Madrid vs Barcelona" data-pick="1" data-odds="2.10">1 <span>2.10</span></button>
+    <button class="odd" data-match="Real Madrid vs Barcelona" data-pick="X" data-odds="3.40">X <span>3.40</span></button>
+    <button class="odd" data-match="Real Madrid vs Barcelona" data-pick="2" data-odds="3.00">2 <span>3.00</span></button>
   </div>
 
 </div>
 
+<!-- BET SLIP -->
 <div class="betslip">
   <h3>Bet Slip</h3>
-  <p>No bets selected</p>
+  <p>Check My Bets page</p>
 </div>
 
+<script src="script.js"></script>
 </body>
 </html>
