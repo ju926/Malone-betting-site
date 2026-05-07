@@ -1,56 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Betting Platform</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>BetHub Betting Platform</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1220;
+      color: white;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 20px;
+      background: #111a2e;
+      border-bottom: 1px solid #1f2a44;
+    }
+
+    /* LAYOUT */
+    .container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    /* MATCHES */
+    .matches {
+      flex: 2;
+    }
+
+    .card {
+      background: #162238;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+    }
+
+    .teams {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .odds button {
+      margin-right: 8px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #24324d;
+      color: white;
+      cursor: pointer;
+    }
+
+    .odds button:hover {
+      background: #2f4368;
+    }
+
+    /* BET SLIP */
+    .betslip {
+      flex: 1;
+      background: #111a2e;
+      padding: 15px;
+      border-radius: 10px;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .place-bet {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      background: #00c853;
+      border: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .place-bet:hover {
+      background: #00e676;
+    }
+
+    .slip-item {
+      background: #1f2a44;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="topbar">
-  <h1>⚽ BetHub</h1>
-  <div class="balance">Balance: KES 0.00</div>
-</header>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <h1>⚽ BetHub</h1>
+    <div>Balance: KES 0.00</div>
+  </div>
 
-<div class="container">
+  <div class="container">
 
-  <!-- LEFT: Matches -->
-  <section class="matches">
+    <!-- MATCHES -->
+    <div class="matches">
 
-    <h2>Live Matches</h2>
+      <h2>Live Matches</h2>
 
-    <div class="card">
-      <div class="teams">Arsenal vs Chelsea</div>
-      <div class="odds">
-        <button>1 2.10</button>
-        <button>X 3.20</button>
-        <button>2 3.10</button>
+      <div class="card">
+        <div class="teams">Arsenal vs Chelsea</div>
+        <div class="odds">
+          <button onclick="addBet('Arsenal vs Chelsea', '1 - 2.10')">1 2.10</button>
+          <button onclick="addBet('Arsenal vs Chelsea', 'X - 3.20')">X 3.20</button>
+          <button onclick="addBet('Arsenal vs Chelsea', '2 - 3.10')">2 3.10</button>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="teams">Real Madrid vs Barcelona</div>
-      <div class="odds">
-        <button>1 2.40</button>
-        <button>X 3.50</button>
-        <button>2 2.60</button>
+      <div class="card">
+        <div class="teams">Real Madrid vs Barcelona</div>
+        <div class="odds">
+          <button onclick="addBet('Real Madrid vs Barcelona', '1 - 2.40')">1 2.40</button>
+          <button onclick="addBet('Real Madrid vs Barcelona', 'X - 3.50')">X 3.50</button>
+          <button onclick="addBet('Real Madrid vs Barcelona', '2 - 2.60')">2 2.60</button>
+        </div>
       </div>
+
     </div>
 
-  </section>
+    <!-- BET SLIP -->
+    <div class="betslip">
+      <h2>Bet Slip</h2>
+      <div id="slip">
+        <p>No selections yet</p>
+      </div>
 
-  <!-- RIGHT: Bet Slip -->
-  <aside class="betslip">
-    <h2>Bet Slip</h2>
-    <div id="slip">
-      <p>No selections yet</p>
+      <button class="place-bet">Place Bet</button>
     </div>
 
-    <button class="place-bet">Place Bet</button>
-  </aside>
+  </div>
 
-</div>
+  <script>
+    const slip = document.getElementById("slip");
 
-<script src="script.js"></script>
+    function addBet(match, selection) {
+      slip.innerHTML = `
+        <div class="slip-item">
+          <p><strong>${match}</strong></p>
+          <p>Selected: ${selection}</p>
+        </div>
+      `;
+    }
+  </script>
+
 </body>
 </html>
