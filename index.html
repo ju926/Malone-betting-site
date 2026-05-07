@@ -1,75 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>BetPro Sportsbook</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b1220;
+      color: white;
+    }
+
+    /* HEADER */
+    header {
+      background: #111a2e;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header nav a {
+      color: #cbd5e1;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    header nav a:hover {
+      color: white;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #4ade80;
+    }
+
+    .btn {
+      background: #4ade80;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #0f172a, #111a2e);
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #94a3b8;
+    }
+
+    /* MATCH GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      padding: 30px;
+      gap: 15px;
+    }
+
+    .card {
+      background: #111a2e;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #1f2a44;
+    }
+
+    .odds button {
+      background: #1f2a44;
+      border: none;
+      margin: 5px;
+      padding: 10px;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .odds button:hover {
+      background: #2a3a5f;
+    }
+
+    /* BET SLIP */
+    .betslip {
+      position: fixed;
+      right: 20px;
+      top: 120px;
+      width: 240px;
+      background: #111a2e;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #1f2a44;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">BetPro</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Live</a>
-      <a href="#">Sports</a>
-      <a href="#">My Bets</a>
-    </nav>
-    <button class="login-btn">Login</button>
-  </header>
+<header>
+  <div class="logo">BetPro</div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Bet Smarter. Win Bigger.</h1>
-    <p>Live odds • Instant payouts • Secure betting platform</p>
-    <button class="cta">Start Betting</button>
-  </section>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Live</a>
+    <a href="#">Bets</a>
+    <a href="#">Wallet</a>
+  </nav>
 
-  <!-- MATCHES -->
-  <section class="container">
-    <h2 class="section-title">Live Matches</h2>
+  <button class="btn">Login</button>
+</header>
 
-    <div class="grid">
+<div class="hero">
+  <h1>Bet Smarter. Win Bigger.</h1>
+  <p>Live odds • Fast payouts • Secure betting</p>
+</div>
 
-      <div class="card">
-        <h3>Arsenal vs Chelsea</h3>
-        <div class="odds">
-          <button>1 <span>1.85</span></button>
-          <button>X <span>3.20</span></button>
-          <button>2 <span>4.10</span></button>
-        </div>
-      </div>
+<div class="grid">
 
-      <div class="card">
-        <h3>Real Madrid vs Barcelona</h3>
-        <div class="odds">
-          <button>1 <span>2.10</span></button>
-          <button>X <span>3.40</span></button>
-          <button>2 <span>3.00</span></button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Man City vs Liverpool</h3>
-        <div class="odds">
-          <button>1 <span>1.95</span></button>
-          <button>X <span>3.50</span></button>
-          <button>2 <span>3.80</span></button>
-        </div>
-      </div>
-
+  <div class="card">
+    <h3>Arsenal vs Chelsea</h3>
+    <div class="odds">
+      <button>1 1.85</button>
+      <button>X 3.20</button>
+      <button>2 4.10</button>
     </div>
-  </section>
+  </div>
 
-  <!-- BET SLIP -->
-  <aside class="betslip">
-    <h3>Bet Slip</h3>
-    <p>No selections yet</p>
-    <button class="place-bet">Place Bet</button>
-  </aside>
+  <div class="card">
+    <h3>Real Madrid vs Barcelona</h3>
+    <div class="odds">
+      <button>1 2.10</button>
+      <button>X 3.40</button>
+      <button>2 3.00</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="betslip">
+  <h3>Bet Slip</h3>
+  <p>No bets selected</p>
+</div>
 
 </body>
 </html>
