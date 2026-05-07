@@ -1,112 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BetPro</title>
-
-  <style>
-    * { margin:0; padding:0; font-family:Arial; box-sizing:border-box; }
-
-    body { background:#0b1220; color:white; }
-
-    header {
-      background:#111a2e;
-      padding:15px 30px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    nav a {
-      color:#cbd5e1;
-      margin:0 10px;
-      text-decoration:none;
-    }
-
-    nav a:hover { color:white; }
-
-    .logo { color:#4ade80; font-weight:bold; }
-
-    .grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      padding:20px;
-      gap:15px;
-    }
-
-    .card {
-      background:#111a2e;
-      padding:15px;
-      border-radius:10px;
-      border:1px solid #1f2a44;
-    }
-
-    .odd {
-      background:#1f2a44;
-      color:white;
-      border:none;
-      padding:8px;
-      margin:5px;
-      border-radius:6px;
-      cursor:pointer;
-    }
-
-    .odd span {
-      color:#4ade80;
-      display:block;
-      font-size:12px;
-    }
-
-    .betslip {
-      position:fixed;
-      right:20px;
-      top:100px;
-      width:240px;
-      background:#111a2e;
-      padding:15px;
-      border-radius:10px;
-      border:1px solid #1f2a44;
-    }
-  </style>
+  <title>Betting Platform</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<header>
-  <div class="logo">BetPro</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="bets.html">My Bets</a>
-    <a href="wallet.html">Wallet</a>
-    <a href="login.html">Login</a>
-  </nav>
+<header class="topbar">
+  <h1>⚽ BetHub</h1>
+  <div class="balance">Balance: KES 0.00</div>
 </header>
 
-<h2 style="padding:20px;">Live Matches</h2>
+<div class="container">
 
-<div class="grid">
+  <!-- LEFT: Matches -->
+  <section class="matches">
 
-  <div class="card">
-    <h3>Arsenal vs Chelsea</h3>
+    <h2>Live Matches</h2>
 
-    <button class="odd" data-match="Arsenal vs Chelsea" data-pick="1" data-odds="1.85">1 <span>1.85</span></button>
-    <button class="odd" data-match="Arsenal vs Chelsea" data-pick="X" data-odds="3.20">X <span>3.20</span></button>
-    <button class="odd" data-match="Arsenal vs Chelsea" data-pick="2" data-odds="4.10">2 <span>4.10</span></button>
-  </div>
+    <div class="card">
+      <div class="teams">Arsenal vs Chelsea</div>
+      <div class="odds">
+        <button>1 2.10</button>
+        <button>X 3.20</button>
+        <button>2 3.10</button>
+      </div>
+    </div>
 
-  <div class="card">
-    <h3>Real Madrid vs Barcelona</h3>
+    <div class="card">
+      <div class="teams">Real Madrid vs Barcelona</div>
+      <div class="odds">
+        <button>1 2.40</button>
+        <button>X 3.50</button>
+        <button>2 2.60</button>
+      </div>
+    </div>
 
-    <button class="odd" data-match="Real Madrid vs Barcelona" data-pick="1" data-odds="2.10">1 <span>2.10</span></button>
-    <button class="odd" data-match="Real Madrid vs Barcelona" data-pick="X" data-odds="3.40">X <span>3.40</span></button>
-    <button class="odd" data-match="Real Madrid vs Barcelona" data-pick="2" data-odds="3.00">2 <span>3.00</span></button>
-  </div>
+  </section>
 
-</div>
+  <!-- RIGHT: Bet Slip -->
+  <aside class="betslip">
+    <h2>Bet Slip</h2>
+    <div id="slip">
+      <p>No selections yet</p>
+    </div>
 
-<!-- BET SLIP -->
-<div class="betslip">
-  <h3>Bet Slip</h3>
-  <p>Check My Bets page</p>
+    <button class="place-bet">Place Bet</button>
+  </aside>
+
 </div>
 
 <script src="script.js"></script>
