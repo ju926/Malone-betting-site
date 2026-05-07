@@ -1,159 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>BetHub Betting Platform</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BetPro - Sports Betting Platform</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0b1220;
+      background: #0f172a;
       color: white;
     }
 
-    /* TOP BAR */
-    .topbar {
+    header {
+      background: #111827;
+      padding: 15px;
       display: flex;
       justify-content: space-between;
-      padding: 15px 20px;
-      background: #111a2e;
-      border-bottom: 1px solid #1f2a44;
+      align-items: center;
     }
 
-    /* LAYOUT */
-    .container {
-      display: flex;
+    nav button {
+      background: #1f2937;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      margin-right: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      background: #374151;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
       gap: 20px;
       padding: 20px;
     }
 
-    /* MATCHES */
-    .matches {
-      flex: 2;
+    section {
+      margin-bottom: 20px;
     }
 
     .card {
-      background: #162238;
-      padding: 15px;
-      margin-bottom: 15px;
+      background: #1e293b;
+      padding: 12px;
       border-radius: 10px;
-    }
-
-    .teams {
-      font-size: 18px;
       margin-bottom: 10px;
     }
 
-    .odds button {
-      margin-right: 8px;
-      padding: 8px 12px;
+    .match button {
+      margin-left: 5px;
+      padding: 5px 10px;
       border: none;
-      border-radius: 6px;
-      background: #24324d;
-      color: white;
+      border-radius: 5px;
       cursor: pointer;
+      background: #334155;
+      color: white;
     }
 
-    .odds button:hover {
-      background: #2f4368;
+    .match button:hover {
+      background: #475569;
     }
 
-    /* BET SLIP */
-    .betslip {
-      flex: 1;
-      background: #111a2e;
+    .game-card {
+      background: #1e293b;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    aside {
+      background: #111827;
       padding: 15px;
       border-radius: 10px;
       height: fit-content;
-      position: sticky;
-      top: 20px;
     }
 
-    .place-bet {
-      width: 100%;
-      margin-top: 15px;
-      padding: 12px;
-      background: #00c853;
-      border: none;
-      color: black;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .place-bet:hover {
-      background: #00e676;
-    }
-
-    .slip-item {
-      background: #1f2a44;
+    .bet-item {
+      background: #1e293b;
       padding: 10px;
-      border-radius: 8px;
       margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <h1>⚽ BetHub</h1>
-    <div>Balance: KES 0.00</div>
-  </div>
+<header>
+  <h2>BetPro</h2>
 
-  <div class="container">
+  <nav>
+    <button onclick="showSection('sports')">Sports</button>
+    <button onclick="showSection('games')">Games</button>
+    <button onclick="showSection('wallet')">Wallet</button>
+  </nav>
+</header>
 
-    <!-- MATCHES -->
-    <div class="matches">
+<main>
 
-      <h2>Live Matches</h2>
+  <!-- SPORTS -->
+  <section id="sports">
 
-      <div class="card">
-        <div class="teams">Arsenal vs Chelsea</div>
-        <div class="odds">
-          <button onclick="addBet('Arsenal vs Chelsea', '1 - 2.10')">1 2.10</button>
-          <button onclick="addBet('Arsenal vs Chelsea', 'X - 3.20')">X 3.20</button>
-          <button onclick="addBet('Arsenal vs Chelsea', '2 - 3.10')">2 3.10</button>
-        </div>
-      </div>
+    <h2>Live Matches</h2>
 
-      <div class="card">
-        <div class="teams">Real Madrid vs Barcelona</div>
-        <div class="odds">
-          <button onclick="addBet('Real Madrid vs Barcelona', '1 - 2.40')">1 2.40</button>
-          <button onclick="addBet('Real Madrid vs Barcelona', 'X - 3.50')">X 3.50</button>
-          <button onclick="addBet('Real Madrid vs Barcelona', '2 - 2.60')">2 2.60</button>
-        </div>
-      </div>
-
+    <div class="card match">
+      Arsenal vs Chelsea
+      <button onclick="addBet('Arsenal Win')">1</button>
+      <button onclick="addBet('Draw')">X</button>
+      <button onclick="addBet('Chelsea Win')">2</button>
     </div>
 
-    <!-- BET SLIP -->
-    <div class="betslip">
-      <h2>Bet Slip</h2>
-      <div id="slip">
-        <p>No selections yet</p>
-      </div>
-
-      <button class="place-bet">Place Bet</button>
+    <div class="card match">
+      Real Madrid vs Barcelona
+      <button onclick="addBet('Real Win')">1</button>
+      <button onclick="addBet('Draw')">X</button>
+      <button onclick="addBet('Barca Win')">2</button>
     </div>
 
-  </div>
+  </section>
 
-  <script>
-    const slip = document.getElementById("slip");
+  <!-- GAMES (SAFE SIMULATION) -->
+  <section id="games" class="hidden">
 
-    function addBet(match, selection) {
-      slip.innerHTML = `
-        <div class="slip-item">
-          <p><strong>${match}</strong></p>
-          <p>Selected: ${selection}</p>
-        </div>
-      `;
-    }
-  </script>
+    <h2>Games</h2>
+
+    <div class="game-card">
+      🎮 Crash Simulator (Demo)
+      <button onclick="playGame()">Play</button>
+    </div>
+
+    <div class="game-card">
+      🎡 Spin Wheel (Demo)
+      <button onclick="playGame()">Play</button>
+    </div>
+
+  </section>
+
+  <!-- WALLET -->
+  <section id="wallet" class="hidden">
+
+    <h2>Wallet</h2>
+    <p>Balance: $0 (Demo)</p>
+
+  </section>
+
+  <!-- BET SLIP -->
+  <aside>
+    <h3>Bet Slip</h3>
+    <div id="bets">No bets selected</div>
+  </aside>
+
+</main>
+
+<script>
+  const bets = [];
+
+  function addBet(bet) {
+    bets.push(bet);
+    renderBets();
+  }
+
+  function renderBets() {
+    const box = document.getElementById("bets");
+    box.innerHTML = "";
+
+    bets.forEach((b, i) => {
+      const div = document.createElement("div");
+      div.className = "bet-item";
+      div.innerText = b;
+      box.appendChild(div);
+    });
+  }
+
+  function playGame() {
+    alert("Demo game launched (no real betting yet)");
+  }
+
+  function showSection(section) {
+    document.getElementById("sports").classList.add("hidden");
+    document.getElementById("games").classList.add("hidden");
+    document.getElementById("wallet").classList.add("hidden");
+
+    document.getElementById(section).classList.remove("hidden");
+  }
+</script>
 
 </body>
 </html>
