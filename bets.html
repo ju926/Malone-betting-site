@@ -2,18 +2,52 @@
 <html>
 <head>
   <title>My Bets</title>
+
   <style>
-    body { margin:0; font-family:Arial; background:#0b1220; color:white; }
-    .card { background:#111a2e; margin:20px; padding:15px; border-radius:10px; }
+    body { font-family:Arial; background:#0b1220; color:white; }
+    .card { background:#111a2e; margin:15px; padding:15px; border-radius:10px; }
+    button { background:red; color:white; border:none; padding:6px; cursor:pointer; }
   </style>
 </head>
+
 <body>
 
 <h2 style="padding:20px;">My Bets</h2>
 
-<div class="card">
-  No bets placed yet
-</div>
+<div id="list"></div>
+
+<script>
+  let bets = JSON.parse(localStorage.getItem("bets")) || [];
+
+  function render() {
+    let html = "";
+
+    if (bets.length === 0) {
+      html = "<div class='card'>No bets yet</div>";
+    } else {
+      bets.forEach((b, i) => {
+        html += `
+          <div class="card">
+            <b>${b.match}</b><br>
+            Pick: ${b.pick}<br>
+            Odds: ${b.odds}<br><br>
+            <button onclick="removeBet(${i})">Remove</button>
+          </div>
+        `;
+      });
+    }
+
+    document.getElementById("list").innerHTML = html;
+  }
+
+  function removeBet(i) {
+    bets.splice(i, 1);
+    localStorage.setItem("bets", JSON.stringify(bets));
+    render();
+  }
+
+  render();
+</script>
 
 </body>
 </html>
