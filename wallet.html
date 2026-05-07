@@ -2,20 +2,46 @@
 <html>
 <head>
   <title>Wallet</title>
+
   <style>
-    body { margin:0; font-family:Arial; background:#0b1220; color:white; }
-    .box { max-width:400px; margin:80px auto; background:#111a2e; padding:25px; border-radius:10px; text-align:center; }
-    .btn { background:#4ade80; padding:10px; border:none; border-radius:6px; margin:10px; cursor:pointer; }
+    body { font-family:Arial; background:#0b1220; color:white; }
+    .box { max-width:400px; margin:60px auto; background:#111a2e; padding:20px; border-radius:10px; text-align:center; }
+    button { background:#4ade80; border:none; padding:10px; margin:10px; cursor:pointer; border-radius:6px; }
   </style>
 </head>
+
 <body>
 
 <div class="box">
   <h2>Wallet Balance</h2>
-  <h1>$0.00</h1>
-  <button class="btn">Deposit</button>
-  <button class="btn">Withdraw</button>
+  <h1>$<span id="bal">0</span></h1>
+
+  <button onclick="deposit()">Deposit +10</button>
+  <button onclick="withdraw()">Withdraw -10</button>
 </div>
+
+<script>
+  let balance = Number(localStorage.getItem("balance")) || 0;
+
+  function update() {
+    document.getElementById("bal").innerText = balance;
+    localStorage.setItem("balance", balance);
+  }
+
+  function deposit() {
+    balance += 10;
+    update();
+  }
+
+  function withdraw() {
+    if (balance >= 10) {
+      balance -= 10;
+      update();
+    }
+  }
+
+  update();
+</script>
 
 </body>
 </html>
