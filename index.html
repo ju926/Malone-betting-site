@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BetPro - Sports Betting Platform</title>
+  <title>Betting Platform</title>
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial;
       background: #0f172a;
       color: white;
     }
@@ -42,10 +42,6 @@
       padding: 20px;
     }
 
-    section {
-      margin-bottom: 20px;
-    }
-
     .card {
       background: #1e293b;
       padding: 12px;
@@ -53,7 +49,7 @@
       margin-bottom: 10px;
     }
 
-    .match button {
+    button.odd {
       margin-left: 5px;
       padding: 5px 10px;
       border: none;
@@ -63,7 +59,7 @@
       color: white;
     }
 
-    .match button:hover {
+    button.odd:hover {
       background: #475569;
     }
 
@@ -78,7 +74,6 @@
       background: #111827;
       padding: 15px;
       border-radius: 10px;
-      height: fit-content;
     }
 
     .bet-item {
@@ -90,6 +85,16 @@
 
     .hidden {
       display: none;
+    }
+
+    .remove {
+      margin-top: 5px;
+      background: red;
+      border: none;
+      padding: 5px;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -113,34 +118,36 @@
 
     <h2>Live Matches</h2>
 
-    <div class="card match">
-      Arsenal vs Chelsea
-      <button onclick="addBet('Arsenal Win')">1</button>
-      <button onclick="addBet('Draw')">X</button>
-      <button onclick="addBet('Chelsea Win')">2</button>
+    <div class="card">
+      Arsenal vs Chelsea <br><br>
+
+      <button class="odd" onclick="addBet('Arsenal vs Chelsea','Arsenal Win',2.1)">1</button>
+      <button class="odd" onclick="addBet('Arsenal vs Chelsea','Draw',3.2)">X</button>
+      <button class="odd" onclick="addBet('Arsenal vs Chelsea','Chelsea Win',3.5)">2</button>
     </div>
 
-    <div class="card match">
-      Real Madrid vs Barcelona
-      <button onclick="addBet('Real Win')">1</button>
-      <button onclick="addBet('Draw')">X</button>
-      <button onclick="addBet('Barca Win')">2</button>
+    <div class="card">
+      Real Madrid vs Barcelona <br><br>
+
+      <button class="odd" onclick="addBet('Real vs Barca','Real Win',2.0)">1</button>
+      <button class="odd" onclick="addBet('Real vs Barca','Draw',3.4)">X</button>
+      <button class="odd" onclick="addBet('Real vs Barca','Barca Win',3.1)">2</button>
     </div>
 
   </section>
 
-  <!-- GAMES (SAFE SIMULATION) -->
+  <!-- GAMES (SAFE DEMO) -->
   <section id="games" class="hidden">
 
     <h2>Games</h2>
 
     <div class="game-card">
-      🎮 Crash Simulator (Demo)
+      Crash Simulator (Demo)
       <button onclick="playGame()">Play</button>
     </div>
 
     <div class="game-card">
-      🎡 Spin Wheel (Demo)
+      Spin Wheel (Demo)
       <button onclick="playGame()">Play</button>
     </div>
 
@@ -148,10 +155,8 @@
 
   <!-- WALLET -->
   <section id="wallet" class="hidden">
-
     <h2>Wallet</h2>
-    <p>Balance: $0 (Demo)</p>
-
+    <p>Balance: $0 (Demo Mode)</p>
   </section>
 
   <!-- BET SLIP -->
@@ -165,8 +170,8 @@
 <script>
   const bets = [];
 
-  function addBet(bet) {
-    bets.push(bet);
+  function addBet(match, selection, odd) {
+    bets.push({ match, selection, odd });
     renderBets();
   }
 
@@ -174,16 +179,34 @@
     const box = document.getElementById("bets");
     box.innerHTML = "";
 
+    if (bets.length === 0) {
+      box.innerHTML = "No bets selected";
+      return;
+    }
+
     bets.forEach((b, i) => {
       const div = document.createElement("div");
       div.className = "bet-item";
-      div.innerText = b;
+
+      div.innerHTML = `
+        <strong>${b.match}</strong><br/>
+        Pick: ${b.selection}<br/>
+        Odd: ${b.odd}
+        <br/>
+        <button class="remove" onclick="removeBet(${i})">Remove</button>
+      `;
+
       box.appendChild(div);
     });
   }
 
+  function removeBet(index) {
+    bets.splice(index, 1);
+    renderBets();
+  }
+
   function playGame() {
-    alert("Demo game launched (no real betting yet)");
+    alert("Demo game (no real money system yet)");
   }
 
   function showSection(section) {
